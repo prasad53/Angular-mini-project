@@ -1,0 +1,216 @@
+<!--<form #userForm="ngForm">
+<div class="container" id="main" class="row" >
+    <div  class="form-group w-10" class="col">
+        <label ><b>First Name:</b></label><br>
+
+        <input type="text" id="user1" class="form-control" [(ngModel)]="firstname"  placeholder="Enter first name"
+        name="fname" #fname="ngModel" 
+        required 
+        minlength="3" 
+        [pattern]="userNamePattern">
+
+        <div  *ngIf="(fname.touched || fname.dirty)  && !fname.valid  && !isValidDone" class="alert alert-danger">
+             <div *ngIf="fname.errors.required  " >First name is required</div>
+             <div *ngIf="fname.errors.minlength">Name must be at least 3 chars long</div>
+             <div *ngIf="fname.errors.pattern">No special characters allowed</div>
+        </div>
+    </div>
+
+    <br>
+
+    <div  class="form-group w-10" class="col">
+        <label><b>Last Name:</b></label><br>
+        <input type="text" id="user2" class="form-control" [(ngModel)]="lastname"   placeholder="Enter last name"
+         name="lname" #lname="ngModel" 
+         required 
+         minlength="3" 
+         [pattern]="userNamePattern">
+        
+        <div  *ngIf="(lname.touched || lname.dirty)  && !lname.valid && !isValidDone" class="alert alert-danger">
+            <div *ngIf="lname.errors.required " >Last name is required</div>
+            <div *ngIf="lname.errors.minlength">Name must be at least 3 chars long</div>
+            <div *ngIf="lname.errors.pattern">No special characters allowed</div>
+       </div>
+    </div>
+
+    <br>
+
+    <div  class="col"><br>
+        <button type="button"  [disabled]="!userForm.form.valid" *ngIf="!isEditable" (click)="add()"  class="btn btn-primary btn-lg">Add</button>
+        <button type="button"  [disabled]="!userForm.form.valid" *ngIf="isEditable"  (click)="update()" class="btn btn-info ">Update</button>
+    </div>
+
+</div>
+
+
+    
+<br><br><br>
+
+
+    <div *ngIf="users.length > 0">
+       <h3> List of Users:</h3><br>
+        <table class="table table-bordered table-condensed">
+
+          <tr class="thead-dark">
+             <th>First Name</th>
+             <th>Last Name</th>
+             <th colspan="2" class="text-center">Menu</th>
+          </tr>
+
+          <tr *ngFor="let n of users; index as i">
+            <td>{{n.name1}}</td>
+            <td>{{n.name2}}</td>
+            <td><button class="btn btn-danger mr-3" (click)="delete(i)">Remove</button>
+                <button class="btn btn-info"  (click)="edit(i)" >Edit</button>
+            </td>
+            
+          </tr>
+
+        </table>
+    </div>
+    <h2 *ngIf="users.length == 0">No users found...</h2>
+
+    {{fid}}
+    
+</form>
+
+<div>
+    <app-employee (clicked)="empMethod($event)"></app-employee>
+</div>-->
+
+<div>
+    
+    <div class="form-group">
+    <input type="text" class="form-control"  placeholder="Search name here" [(ngModel)]="searchByName"
+    style="width:400px; margin-left:500px;" name="searchText">
+    </div><br>
+
+<div >
+    <table class="table table-bordered table-condensed">
+
+    <tr class="thead-dark">
+       <th>Name</th>
+       <th>Contact</th>
+       <th>Date Of Joining</th>
+       <th>Mail</th>
+       <th colspan="2" class="text-center">Menu</th>
+    </tr>
+
+    <tr *ngFor="let d of displayMessage | employeeFilter:searchByName ; index as i">
+      <td>{{d.ename}}</td>
+      <td>{{d.cnumber}}</td>
+      <td>{{d.doj}}</td>
+      <td>{{d.mail}}</td>
+      <td><button class="btn btn-danger mr-3" (click)="delete(i)">Remove</button>
+          <button class="btn btn-primary" (click)="edit(i)">Edit</button>
+      </td>
+    </tr>
+
+  </table>
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<br><br><br>
+{{data}}
+
+<br>
+{{getName()}}<br>
+
+<h1>{{title}}</h1>
+
+<button (click)="change()">Change</button>
+<br><br>
+
+<ul>
+<li *ngFor="let user of users">{{user}}</li>
+</ul>
+
+<table class="table">
+<tr class="thead-dark">
+    <th>ID</th>
+    <th>Name</th>
+    <th>City</th>
+</tr>
+<tr *ngFor="let user of users">
+    <td>{{user.id}}</td>
+    <td>{{user.name}}</td>
+    <td>{{user.city}}</td>
+</tr>
+</table>
+
+
+<div *ngIf="isUserLogged; else logout">
+<h3>Welcome user</h3>
+</div>
+
+<ng-template #logout>
+<p>You are not logged in</p>
+</ng-template> -->
+
+<!--<br><br>
+Select Country:<select (change)="choice($event.target.value)">
+<option>Select country</option>
+<option *ngFor="let c of countries" [value]="c.code">{{c.country}}</option>
+</select>
+
+<br><br>
+<div [ngSwitch]="selectedCountry">
+    <div *ngSwitchCase="'ind'" class="jumbotron">
+        <h2>Indian calling code is +91</h2>
+    </div>
+
+    <div *ngSwitchCase="'aus'" class="jumbotron">
+        <h2>australian calling code is +76</h2>
+    </div>
+
+    <div *ngSwitchCase="'us'" class="jumbotron">
+        <h2>America calling code is +44</h2>
+    </div>
+
+    <div *ngSwitchDefault class="jumbotron">
+        <h2>Select your country</h2>
+    </div>
+
+    </div>
+
+    <h3>Value from parent component is: {{uname}}</h3> -->
