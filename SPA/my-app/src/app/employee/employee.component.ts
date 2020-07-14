@@ -17,15 +17,16 @@ export class EmployeeComponent implements OnInit {
   employeeList:any[];
   uindex:any;
   isEdit:Boolean=false;
+  employeeData:any[];
   
   ngOnInit(): void {
     this.service.share.subscribe(message=>this.message=message);
     this.service.share1.subscribe(umessage=>this.umessage=umessage);
     this.employeeList=this.umessage;
     this.service.share2.subscribe(uindex=>this.uindex=uindex)
-
     
-    this.name=this.service.getName();
+    this.employeeData=this.service.getAllUsers();
+   /* this.name=this.service.getName();
     this.joiningDate=this.service.getDOJ();
     this.contactNumber=this.service.getcontactNumber;
     this.email=this.service.getEmail();
@@ -59,10 +60,10 @@ export class EmployeeComponent implements OnInit {
     this.service.setPanPattern(this.panPattern);
     this.panPattern=this.service.getPanPattern();
     this.service.setLicencePattern(this.licencePattern);
-    this.licencePattern=this.service.getLicencePattern();
+    this.licencePattern=this.service.getLicencePattern();*/
     
     //console.log("Hello"+this.employeeList[this.uindex]);
-    this.name=this.employeeList[this.uindex].ename;
+    /*this.name=this.employeeList[this.uindex].ename;
     this.joiningDate=this.employeeList[this.uindex].doj;
     this.contactNumber=this.employeeList[this.uindex].cnumber;
     this.email=this.employeeList[this.uindex].mail;
@@ -83,13 +84,13 @@ export class EmployeeComponent implements OnInit {
     this.employeePassport=this.employeeList[this.uindex].passport;
     this.bloodGroup=this.employeeList[this.uindex].blood;
     this.employeeRemark=this.employeeList[this.uindex].remark;
-    this.option=this.employeeList[this.uindex].name;
+    this.option=this.employeeList[this.uindex].name;*/
 
    // this.isEdit=true;
     
    }
-
-name;
+   
+/*name;
 contactNumber;
 email;
 joiningReference;
@@ -127,7 +128,7 @@ emailPattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$";
 contactPattern="^[7-9][0-9]{9}$";
 aadharPattern="^[0-9]{12}$";
 panPattern="^[A-Z]{5}[0-9]{4}[A-Z]{1}$";
-licencePattern="^[A-Z]{2}[0-9]{13}$";
+licencePattern="^[A-Z]{2}[0-9]{13}$"; */
 
 onSubmit(value:any){
  // console.log(value);

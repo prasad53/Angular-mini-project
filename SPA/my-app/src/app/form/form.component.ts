@@ -31,7 +31,7 @@ export class FormComponent implements OnInit {
    this.displayMessage=this.message;
    console.log(this.displayMessage);
    
-   this.name=this.service.getName();
+  /* this.name=this.service.getName();
     this.contactNumber=this.service.getcontactNumber;
     this.email=this.service.getEmail();
     this.joiningReference=this.service.getReference();
@@ -40,7 +40,7 @@ export class FormComponent implements OnInit {
     this.emergencyContact=this.service.getEmergency();
     this.aadharNumber=this.service.getAadhar();
     this.panNumber=this.service.getPan();
-    this.licenceNumber=this.service.getLicence();
+    this.licenceNumber=this.service.getLicence();*/
 
    //this.displayMessage[this.changeIndex].ename=this.name;
   }
