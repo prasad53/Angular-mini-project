@@ -22,7 +22,7 @@ export class FormComponent implements OnInit {
    //console.log(this.message);
    this.displayMessage=this.message;
    console.log(this.displayMessage);
-   
+   this.employeeData=this.service.getAllUsers();
   
   }
  
@@ -30,7 +30,8 @@ export class FormComponent implements OnInit {
   displayMessage:any;
   searchByName:any;
   changeIndex:any;
-
+  employeeData:any[];
+  isEdit:Boolean=false;
 
   delete(item)
   {
@@ -38,8 +39,9 @@ export class FormComponent implements OnInit {
   }
 
   edit(item){
-    this.router.navigate(['/create']);
-
+    this.router.navigate(['/update']);
+    this.isEdit=true;
+    this.service.newflag(this.isEdit);
     this.service.updateMsg(this.displayMessage[item]);
     this.service.sendIndex(item);
 

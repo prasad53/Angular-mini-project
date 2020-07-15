@@ -15,9 +15,10 @@ const routes:Routes=[
     {path:'about',component:EmployeeComponent},
     {path:'create',component:EmployeeComponent},
     {path:'list',component:FormComponent},
+    {path:'update',component:EmployeeComponent},
+    {path:'list/:id',component:FormComponent},
     {path:'**',redirectTo:'create'},
-    {path:'list/:id',component:FormComponent}
-];
+  ];
 
 @NgModule({
   declarations: [

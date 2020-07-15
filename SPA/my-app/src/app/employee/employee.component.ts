@@ -16,21 +16,32 @@ export class EmployeeComponent implements OnInit {
   umessage:any[];
   employeeList:any[];
   uindex:any;
-  isEdit:Boolean=false;
+  flagValue;
   employeeData:any[];
+  updatedData:any[];
   
   ngOnInit(): void {
     this.service.share.subscribe(message=>this.message=message);
     this.service.share1.subscribe(umessage=>this.umessage=umessage);
     this.employeeList=this.umessage;
-    this.service.share2.subscribe(uindex=>this.uindex=uindex)
-    
+    this.service.share2.subscribe(uindex=>this.uindex=uindex);
+    this.service.flag.subscribe(uflag=>this.flagValue=uflag);
+
     this.employeeData=this.service.getAllUsers();
-   
-    // this.isEdit=true;
+   this.updatedData=this.employeeData;
     
+    if(this.flagValue){
+   this.update();
+    }
    }
    
+   update()
+   {
+    //this.isEdit=true;
+    this.employeeData=this.employeeList[this.uindex];
+    console.log(this.employeeData);
+   }
+
 onSubmit(value:any){
  // console.log(value);
  // alert("The form was submitted");

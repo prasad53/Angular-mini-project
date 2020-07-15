@@ -1,4 +1,4 @@
-<div class="container card " *ngIf="let e of employeeData ; let i=index">  
+<div class="container card " *ngFor="let e of employeeData ; let i=index">  
     <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm.value) " >
             
         <div class=" card-header bg-primary text-white text-center" >
@@ -88,7 +88,7 @@
                 <label><b>Select Qualification:</b><span style="color: red;">*</span></label>
                 <select  class="custom-select form-control" id="qual" name="option" #option="ngModel" [(ngModel)]="e.qualf" required>
                      
-                    <option *ngFor="let q of qualification" [value]="q.id">{{q.name}}</option>
+                    <option *ngFor="let q of e.qualification" [value]="q.id">{{q.name}}</option>
                 </select>
             
                 <div *ngIf="option.touched && option.invalid" class="alert alert-danger">
@@ -298,4 +298,6 @@
     
     </form>
     </div>
+    
+
     

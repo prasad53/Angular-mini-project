@@ -69,7 +69,8 @@ licencePattern:"^[A-Z]{2}[0-9]{13}$",
   updateIndex=new BehaviorSubject<any>('');
   share2=this.updateIndex.asObservable();
 
-  
+  setflag=new BehaviorSubject<any>('');
+  flag=this.setflag.asObservable();
  //@Output() clicked:EventEmitter<any> =new EventEmitter<any>();
   
   changeMsg(message:any){
@@ -87,7 +88,9 @@ licencePattern:"^[A-Z]{2}[0-9]{13}$",
     this.updateIndex.next(index);
   }
 
-  
+  newflag(f:any){
+    this.setflag.next(f);
+  }  
   
     
    // return value;
