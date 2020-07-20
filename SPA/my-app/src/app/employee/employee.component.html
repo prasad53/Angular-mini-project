@@ -1,5 +1,5 @@
 <div class="container card " *ngFor="let e of employeeData ; let i=index">  
-    <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm.value) " >
+    <form #empForm="ngForm" (ngSubmit)="onSubmit(empForm.value) ;empForm.reset()" >
             
         <div class=" card-header bg-primary text-white text-center" >
             <h3 >Employee Form</h3>
@@ -13,7 +13,7 @@
             placeholder="Enter full name"
             required
             minlength="2"
-            [pattern]="e.employeeNamePattern">
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$">
     
             <div *ngIf="(ename.touched || ename.dirty) && ename.invalid" class="alert alert-danger">
                 <div *ngIf="ename.errors.required">Employee name is required</div>
@@ -34,7 +34,7 @@
             <label><b>Contact Number:</b></label><span style="color: red;">*</span><br>
             <input type="number"  class="form-control" name="cnumber" #cnumber="ngModel" [(ngModel)]="e.contactNumber"
               placeholder="Enter contact number"
-              [pattern]="e.contactPattern" 
+              pattern="^[7-9][0-9]{9}$" 
               required
               maxlength="10" 
               minlength="10">  
@@ -50,7 +50,7 @@
             <input type="email" class="form-control" name="mail" #mail="ngModel" [(ngModel)]="e.email"
             placeholder="Enter valid email id"
             required 
-            [pattern]="e.emailPattern" >
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,3}$" >
     
             <div *ngIf="(mail.touched || mail.dirty) && mail.invalid" class="alert alert-danger">
                 <div *ngIf="mail.errors.required">Email is required</div>
@@ -88,7 +88,13 @@
                 <label><b>Select Qualification:</b><span style="color: red;">*</span></label>
                 <select  class="custom-select form-control" id="qual" name="option" #option="ngModel" [(ngModel)]="e.qualf" required>
                      
-                    <option *ngFor="let q of e.qualification" [value]="q.id">{{q.name}}</option>
+                <option value="BE">BE</option>
+                <option value="BTech">BTech</option>
+                <option value="ME">ME</option>
+                <option value="MCA">MCA</option>
+                <option value="MTech">MTech</option>
+                <option value="BCS">BCS</option>
+                <option value="MCS">MCS</option>
                 </select>
             
                 <div *ngIf="option.touched && option.invalid" class="alert alert-danger">
@@ -121,7 +127,7 @@
             placeholder="Enter joining reference"
             required
             minlength="2"
-            [pattern]="e.employeeNamePattern">
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$">
     
             <div *ngIf="(reference.touched || reference.dirty) && reference.invalid" class="alert alert-danger">
                 <div *ngIf="reference.errors.required"> Name is required</div>
@@ -146,7 +152,7 @@
             placeholder="Enter Designation" 
             required
             minlength="2"
-            [pattern]="e.employeeNamePattern"><br>
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$"><br>
     
             <div *ngIf="(Designation.touched || Designation.dirty) && Designation.invalid" class="alert alert-danger">
                 <div *ngIf="Designation.errors.required">Designation is required</div>
@@ -161,7 +167,7 @@
             placeholder="Enter name of reporting person"
             required
             minlength="2"
-            [pattern]="e.employeeNamePattern">
+            pattern="^[a-zA-Z0-9]+([_ -]?[a-zA-Z0-9])*$">
     
             <div *ngIf="(reporting.touched || reporting.dirty) && reporting.invalid" class="alert alert-danger">
                 <div *ngIf="reporting.errors.required"> Name is required</div>
@@ -198,7 +204,7 @@
             <label><b>Emergency Contact Number:</b></label><span style="color: red;">*</span><br>
             <input type="number" name="emergency" class="form-control" placeholder="Enter emeregency contact here"
             #emergency="ngModel" [(ngModel)]="e.emergencyContact" 
-            [pattern]="e.contactPattern" 
+            pattern="^[7-9][0-9]{9}$" 
             required 
             maxlength="10" 
             minlength="10">
@@ -215,7 +221,7 @@
             required
             maxlength="12" 
             minlength="12" 
-            [pattern]="e.aadharPattern">
+            pattern="^[0-9]{12}$">
              <div *ngIf="(aadhar.touched || aadhar.dirty) && aadhar.invalid" class="alert alert-danger">
                 <div *ngIf="aadhar.errors.required">Aadhar number required</div>
                 <div *ngIf="aadhar.errors.pattern">Please enter a valid aadhar number</div>
@@ -231,7 +237,7 @@
             required 
             maxlength="10" 
             minlength="10"
-            [pattern]="e.panPattern">
+            pattern="^[A-Z]{5}[0-9]{4}[A-Z]{1}$">
             <div *ngIf="(pan.touched || pan.dirty) && pan.invalid" class="alert alert-danger">
                 <div *ngIf="pan.errors.required">PAN number required</div>
                 <div *ngIf="pan.errors.pattern">Please enter a valid PAN number</div>
@@ -245,7 +251,7 @@
             required 
             maxlength="15"
             minlength="15"
-            [pattern]="e.licencePattern">
+            pattern="^[A-Z]{2}[0-9]{13}$">
             <div *ngIf="(licence.touched || licence.dirty) && licence.invalid" class="alert alert-danger">
                 <div *ngIf="licence.errors.required">Licence number required</div>
                 <div *ngIf="licence.errors.pattern">Please enter a valid licence number</div>
@@ -293,7 +299,8 @@
         </div>
     
         <div class="text-right">
-            <button [disabled]="!empForm.form.valid" type="submit" class="btn btn-primary">Submit</button>
+            <button [disabled]="!empForm.form.valid" type="submit" *ngIf="!isUpdate"  class="btn btn-primary">Submit</button>
+            <button [disabled]="!empForm.form.valid" type="submit" *ngIf="isUpdate"  (click)="update()" class="btn btn-primary">Update</button>
         </div><br><br><br>
     
     </form>

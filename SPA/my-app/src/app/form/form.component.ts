@@ -22,15 +22,22 @@ export class FormComponent implements OnInit {
    //console.log(this.message);
    this.displayMessage=this.message;
    console.log(this.displayMessage);
+   this.service.newData.subscribe(u=>this.updatedValues=u)
+   //this.updateList();
    this.employeeData=this.service.getAllUsers();
   
   }
+ 
+  clearFields(){
+    this.employeeData=this.service.getAllUsers();
+   }
  
   message:any;
   displayMessage:any;
   searchByName:any;
   changeIndex:any;
   employeeData:any[];
+  updatedValues:any[];
   isEdit:Boolean=false;
 
   delete(item)
@@ -44,7 +51,8 @@ export class FormComponent implements OnInit {
     this.service.newflag(this.isEdit);
     this.service.updateMsg(this.displayMessage[item]);
     this.service.sendIndex(item);
-
+    this.displayMessage=this.updatedValues;
+    this.clearFields();
   }
 
 }
