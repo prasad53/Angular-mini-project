@@ -139,9 +139,9 @@
         
             <label ><b>Department:</b></label><span style="color: red;">*</span><br>
         <div class="custom-control custom-radio">
-            <input type="radio" class="custom-control-input" name="Dept" value="Engg" checked required id="cust6" #Dept="ngModel" [(ngModel)]="employeeData.employeeDepartment">
+            <input type="radio" class="custom-control-input" name="Dept" value="Engg"  checked required id="cust6" #Dept="ngModel" [(ngModel)]="employeeData.employeeDepartment">
             <label class="custom-control-label " for="cust6">Engineering</label><br><br>
-            <div *ngIf="Dept.touched  && Dept.invalid" class="alert alert-danger">
+           <div *ngIf="Dept.touched  && Dept.invalid" class="alert alert-danger">
                 <div *ngIf="Dept.errors.required" >Department is required</div>
             </div>
         </div>

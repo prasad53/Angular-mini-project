@@ -2,6 +2,7 @@ import { Component, OnInit ,Input} from '@angular/core';
 import { findReadVarNames, ThrowStmt } from '@angular/compiler/src/output/output_ast';
 import { ActivatedRoute,Router } from '@angular/router';
 import { DataShareService } from '../data-share.service';
+import { escapeIdentifier } from '@angular/compiler/src/output/abstract_emitter';
 
 @Component({
   selector: 'app-form',
@@ -26,12 +27,13 @@ export class FormComponent implements OnInit {
    //this.updateList();
    this.employeeData=this.service.getAllUsers();
   
+   this.service.falseFlag.subscribe(flagMessage=>this.editFalse=flagMessage);
+   
+   this.editFalse=false;
+    this.service.newCreate(this.editFalse);
   }
  
-  clearFields(){
-    this.employeeData=this.service.getAllUsers();
-   }
- 
+  
   message:any;
   displayMessage:any;
   searchByName:any;
@@ -39,6 +41,7 @@ export class FormComponent implements OnInit {
   employeeData:any[];
   updatedValues:any[];
   isEdit:Boolean=false;
+  editFalse:Boolean;
 
   delete(item)
   {
@@ -52,7 +55,8 @@ export class FormComponent implements OnInit {
     this.service.updateMsg(this.displayMessage[item]);
     this.service.sendIndex(item);
     this.displayMessage=this.updatedValues;
-    this.clearFields();
+    
+  //  this.clearFields();
   }
 
 }

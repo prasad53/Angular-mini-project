@@ -74,6 +74,12 @@ licencePattern:"^[A-Z]{2}[0-9]{13}$",
 
   setNewData=new BehaviorSubject<any>('');
   newData=this.setNewData.asObservable();
+
+  flagDone=new BehaviorSubject<any>('');
+  falseFlag=this.flagDone.asObservable();
+
+  createNew=new BehaviorSubject<any>('');
+  newRecord=this.createNew.asObservable();
  //@Output() clicked:EventEmitter<any> =new EventEmitter<any>();
   
   changeMsg(message:any){
@@ -99,6 +105,13 @@ licencePattern:"^[A-Z]{2}[0-9]{13}$",
     this.setNewData.next(this.updateMessage.getValue().concat([upArray]));
   }
     
+  editDone(flagFalse){
+    this.flagDone.next(flagFalse);
+  }
+
+  newCreate(create){
+    this.createNew.next(create);
+  }
    // return value;
   //}
 }

@@ -10,40 +10,49 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./employee.component.css']
 })
 export class EmployeeComponent implements OnInit {
+  
   empForm:NgForm
   constructor(private router: Router,private service:DataShareService,) { 
    // this.service.msg.subscribe(value)
   }
+  
   message:any;
   umessage:any[];
   employeeList:any[];
   uindex:any;
-  flagValue;
+  flagValue:boolean=false;
   employeeData:any[];
   updatedData:any[];
   newEmployeeData:any;
   isUpdate:boolean=false;
+  record:boolean;
   
   ngOnInit(): void {
-    this.employeeData=[{}];
+    //this.employeeData=[{}];
     this.clearFields();
     this.service.share.subscribe(message=>this.message=message);
     this.service.share1.subscribe(umessage=>this.umessage=umessage);
     this.employeeList=this.umessage;
     this.service.share2.subscribe(uindex=>this.uindex=uindex);
     this.service.flag.subscribe(uflag=>this.flagValue=uflag);
-
+    this.service.newRecord.subscribe(newRec=>this.record=newRec);
    // this.clearFields();
     
    this.updatedData=this.employeeData;
     
-    if(this.flagValue){
+    if(this.flagValue==true){
+   
    this.edit();
+   
     }
-   /* else{
+   /*else if(this.record==false){
+    this.clearFields();
       //this.router.navigate(['/create']);
-      this.clearFields();
-      this.empForm.resetForm();
+     // this.flagValue=false;
+     // this.service.editDone(this.flagValue);
+      //this.clearFields();
+      //this.empForm.resetForm();
+
     }*/
    
    }
@@ -74,7 +83,7 @@ export class EmployeeComponent implements OnInit {
       emergencyContact:this.employeeList[this.employeeList.length-1].emergency,
       aadharNumber:this.employeeList[this.employeeList.length-1].aadhar,
       panNumber:this.employeeList[this.employeeList.length-1].pan,
-      licenceNumber:this.employeeList[this.employeeList.length-1].licence,
+      licenceNumber:this.employeeList[this.employeeList.length-1].licence,  
       employeePassport:this.employeeList[this.employeeList.length-1].passport,
       bloodGroup:this.employeeList[this.employeeList.length-1].blood,
       employeeRemark:this.employeeList[this.employeeList.length-1].remark
@@ -83,6 +92,8 @@ export class EmployeeComponent implements OnInit {
     
     this.isUpdate=true;
     console.log(this.employeeData);
+    this.flagValue=false;
+    this.service.newflag(this.flagValue);
    }
 
    update()
@@ -95,11 +106,12 @@ export class EmployeeComponent implements OnInit {
 
     this.newEmployeeData=this.employeeList;
     this.service.takeUpdatedData(this.newEmployeeData[this.uindex]);
-    //this.router.navigate(['/list']);
+    this.router.navigate(['/list']);
     
     this.isUpdate=false;
-    this.employeeData=[{}];
-    //this.clearFields();
+    //this.employeeData=[{}];
+    
+   // this.clearFields();
    }
    
    
