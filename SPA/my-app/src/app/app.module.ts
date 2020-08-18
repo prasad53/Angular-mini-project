@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import {HttpClientModule} from '@angular/common/http';
 import { AppComponent } from './app.component';
 import { FormComponent } from './form/form.component';
 import  { FormsModule } from '@angular/forms';
@@ -29,7 +29,7 @@ const routes:Routes=[
     EmployeeFilterPipe
   ],
   imports: [
-    BrowserModule,FormsModule,RouterModule.forRoot(routes)
+    BrowserModule,FormsModule,RouterModule.forRoot(routes),HttpClientModule
   ],
   providers: [ DataShareService],
   bootstrap: [AppComponent]

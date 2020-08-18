@@ -13,10 +13,10 @@ export class AboutComponent implements OnInit {
 
   ngOnInit(): void {
     this.clearFields();
-    this.empForm.resetForm();
+   // this.empForm.resetForm();
   }
 
-  employeeData:any[];
+  employeeData:any;
   clearFields(){
     this.employeeData=this.service.getAllUsers();
    }

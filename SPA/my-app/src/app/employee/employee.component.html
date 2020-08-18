@@ -6,7 +6,7 @@
         </div>
     
         <span style="color: red;">*</span><span >Required field</span><br><br>
-        
+        <input type="hidden" name="_id" #_id="ngModel" [(ngModel)]="e._id">
         <div class="form-group">
             <label for="ename" class="control-label-"><b>Employee Full Name:</b></label><span style="color: red;">*</span><br>
             <input type="text" id="ename" class="form-control " name="ename" #ename="ngModel" [(ngModel)]="e.name" 

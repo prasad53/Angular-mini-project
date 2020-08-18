@@ -18,22 +18,26 @@ export class FormComponent implements OnInit {
 
   ngOnInit() {
    
-    this.service.share.subscribe(message=>this.message=message);
+    //this.service.share.subscribe(message=>this.message=message);
    // this.service.share3.subscribe(changeIndex=>this.changeIndex=changeIndex);
    //console.log(this.message);
-   this.displayMessage=this.message;
+   this.service.readEmployee().subscribe(d=>{
+     this.displayMessage=d;
+   })
+   //this.displayMessage=this.message;
    console.log(this.displayMessage);
    this.service.newData.subscribe(u=>this.updatedValues=u)
    //this.updateList();
    this.employeeData=this.service.getAllUsers();
   
-   this.service.falseFlag.subscribe(flagMessage=>this.editFalse=flagMessage);
+  
+  // this.service.falseFlag.subscribe(flagMessage=>this.editFalse=flagMessage);
    
-   this.editFalse=false;
-    this.service.newCreate(this.editFalse);
+  // this.editFalse=false;
+   // this.service.newCreate(this.editFalse);
   }
  
-  
+  _id?:String;
   message:any;
   displayMessage:any;
   searchByName:any;
@@ -41,11 +45,18 @@ export class FormComponent implements OnInit {
   employeeData:any[];
   updatedValues:any[];
   isEdit:Boolean=false;
-  editFalse:Boolean;
+  //editFalse:Boolean;
 
   delete(item)
   {
-    this.displayMessage.splice(item,1);
+    this.service.deleteEmployee(item._id).subscribe(data=>{
+      this.displayMessage.splice(this.displayMessage.indexOf(item),1);
+      console.log(data);
+    },
+    err=>{
+      console.log(err);
+    }
+    )
   }
 
   edit(item){
