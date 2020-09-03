@@ -18,7 +18,7 @@ var bodyparser=require('body-parser');
 var mongoOp=require('./Models/employeeModel');
 app.use(bodyparser.urlencoded({extended:true}));
 
-
+mongoose.set('useFindAndModify', false);
 app.use(express.urlencoded({extended:true}));
 app.use(express.json());
 app.use(bodyparser.json());
@@ -82,14 +82,37 @@ status: req.body.status
 })
 
 app.put('/update',function(req,res){
-    mongoOp.findById(req.body._id,(err,emp)=>{
-
-       if(err)
+    
+    //var task=req.body;
+   /* mongoOp.findById(req.body._id,(err,emp)=>{
+     //   console.log(req.body);console.log(emp);
+      if(err)
         {
             res.status(500).send('Error in finding ID');
-        }
-        
-        emp.ename=req.body.ename;
+        }*/console.log(req.body);
+        var emp={
+        ename:req.body.ename,
+        Dept:req.body.Dept,
+        Designation:req.body.Designation,
+        Gender:req.body.Gender,
+        PerAddress:req.body.PerAddress,
+        TempAddress:req.body.TempAddress,
+        aadhar:req.body.aadhar,
+        blood:req.body.blood,
+        cnumber:req.body.cnumber,
+        dob:req.body.dob,
+        doj:req.body.doj,
+        emergency:req.body.emergency,
+        licence:req.body.licence,
+        mail:req.body.mail,
+        option:req.body.option,
+        pan:req.body.pan,
+        passport:req.body.passport,
+        reference:req.body.reference,
+        remark:req.body.remark,
+        reporting:req.body.reporting,
+        status:req.body.status} ; 
+     /*   emp.ename=req.body.ename;
         emp.Dept=req.body.Dept;
         emp.Designation=req.body.Designation;
         emp.Gender=req.body.Gender;
@@ -109,10 +132,13 @@ app.put('/update',function(req,res){
         emp.reference=req.body.reference;
         emp.remark=req.body.remark;
         emp.reporting=req.body.reporting;
-        emp.status=req.body.status;
-        
-        
-    emp.save(function(err){
+        emp.status=req.body.status;*/
+        mongoOp.findByIdAndUpdate(req.body._id,{$set:emp},{ new: true },(err,doc)=>{
+            if(err) res.send('Error');
+            res.send(doc);
+        })
+        console.log(emp);
+   /* emp.save(function(err,emp){
         if(err)
         {
             res.json({msg:'Failed to update details.'});
@@ -121,9 +147,9 @@ app.put('/update',function(req,res){
         {
             res.send('Successfully updated the record'); 
         }
-    })
+    })*/
         
-})
+//})
 
    /* mongoOp.findOneAndUpdate({_id:req.params.id},{
         $set:{
@@ -189,3 +215,4 @@ app.listen(3100,function(){
     console.log('Connected to server!');
 })
 
+module.exports=app;

@@ -131,7 +131,7 @@ export class EmployeeComponent implements OnInit {
     this.isUpdate=false;
 
     
-    this.service.updateEmployee(this.newEmployeeData).subscribe(upData=>{
+    this.service.updateEmployee(this.newEmployeeData[this.newEmployeeData.length-1]).subscribe(upData=>{
       console.log(upData);
     },
     error=>

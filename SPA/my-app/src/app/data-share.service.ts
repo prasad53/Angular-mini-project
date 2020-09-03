@@ -89,11 +89,11 @@ export class DataShareService {
   setNewData=new BehaviorSubject<any>('');
   newData=this.setNewData.asObservable();
 
-  flagDone=new BehaviorSubject<any>('');
+ /* flagDone=new BehaviorSubject<any>('');
   falseFlag=this.flagDone.asObservable();
 
   createNew=new BehaviorSubject<any>('');
-  newRecord=this.createNew.asObservable();
+  newRecord=this.createNew.asObservable();*/
  //@Output() clicked:EventEmitter<any> =new EventEmitter<any>();
   
   changeMsg(message:any){
